@@ -21,7 +21,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late List<Country> countries;
-  late  List<Country> filteredCountries = [];
+  late List<Country> filteredCountries = [];
   final TextEditingController _controller = TextEditingController();
   // ignore: non_constant_identifier_names
   bool _IsSearching = false;
@@ -150,10 +150,14 @@ class _MyAppState extends State<MyApp> {
 
   void searchForText(String searchText) {
     setState(() {
-      filteredCountries = countries
+      // ignore: deprecated_member_use
+      List<dynamic> tempList = [];
+      //filteredCountries.map((country) => where(country.name.toLowerCase().contains(searchText.toLowerCase())));
+      tempList = countries
           .where((country) =>
               country.name.toLowerCase().contains(searchText.toLowerCase()))
           .toList();
+      filteredCountries = tempList.cast();
     });
   }
 }
